@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
+	
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		
+		http://www.springframework.org/schema/util 
+		http://www.springframework.org/schema/util/spring-util-4.0.xsd 
+		
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+	<!-- 属性注入 -->
+	<!-- 1.property name value -->
+	<bean id="helloword" class="cq.spring4.helloword.HelloWord">
+		<property name="name" value="caiqing2"></property>
+	</bean>
+	<!-- 2.p命名空间 -->
+	<bean id="helloword_p" class="cq.spring4.helloword.HelloWord" p:name="caiqing_p">
+	</bean>
+
+	<!-- 构造器注入 -->
+	<bean id="car" class="cq.spring4.helloword.Car">
+		<constructor-arg value="aodi" ></constructor-arg>
+		<constructor-arg value="deguo" ></constructor-arg>
+		<constructor-arg value="30000" type="double"></constructor-arg>
+	</bean>
+	
+	<!-- 构造器注入  重载的情况 通过类型type来区分 -->
+	<bean id="car2" class="cq.spring4.helloword.Car">
+		<constructor-arg value="bmw" ></constructor-arg>
+		<constructor-arg value="shanghai" ></constructor-arg>
+		<constructor-arg value="200" type="int"></constructor-arg>
+	</bean>
+
+	<!-- 引用类型  ref="car2"-->
+	<bean id="person" class="cq.spring4.helloword.Person">
+		<property name="name" value="caiqing"></property>
+		<property name="age" value="18"></property>
+		
+		<!--1引用类型  ref="car2"  -->
+		<!-- <property name="car" ref="car2" ></property> -->
+		
+		<!--2 内部bean 不能被外部引用 -->
+		<!-- <property name="car">
+			<bean class="cq.spring4.helloword.Car">
+				<constructor-arg value="benci"></constructor-arg>
+				<constructor-arg value="beijing"></constructor-arg>
+				<constructor-arg value="1000000" type="double"></constructor-arg>
+			</bean>
+		</property> -->
+		
+		<!--  赋值 null <null/> -->
+	
+		
+	</bean>
+	
+	<!-- 1测试list集合 -->
+	<bean id="personCarList" class="cq.spring4.helloword.PersonCarList">
+		<property name="name" value="caiqing"></property>
+		<property name="age" value="23"></property>
+		
+		<!-- 1.1内部bean -->
+		<!-- 
+		<property name="cars">
+			<list>
+				<ref bean="car"/>
+				<ref bean="car2"/>
+				<bean class="cq.spring4.helloword.Car">
+					<constructor-arg value="benci"></constructor-arg>
+					<constructor-arg value="beijing"></constructor-arg>
+					<constructor-arg value="1000000" type="double"></constructor-arg>
+				</bean> 
+			</list>
+		</property>
+		-->
+		<!-- 1.2 util:list -->
+		<property name="cars" ref="util_cars"></property>
+		
+	</bean>
+	
+	<!-- 2通过util配置单例集合bean 可供多个bean引用  需要导入util:list命名空间-->
+	
+	<util:list id="util_cars">
+		<ref bean="car"/>
+		<ref bean="car2"/>
+	</util:list>
+	
+	<!-- 配置map属性值 -->
+	<bean id="personCarMap" class="cq.spring4.helloword.PersonCarMap">
+		<property name="name" value="caiqing"></property>
+		<property name="age" value="24"></property>
+		<property name="cars">
+			<map>
+				<entry key="AA" value-ref="car"></entry>
+				<entry key="BB" value-ref="car2"></entry>			
+			</map>
+		</property>
+	</bean>
+	
+	
+	<!-- aop 面向切面 之基于注解   -->
+	<context:component-scan base-package="cq.spring4.aop.aspectj"></context:component-scan>
+	
+	
+	
+</beans>

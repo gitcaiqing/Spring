@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+	<!-- 配置自动扫描的包: 需要加入 aop 对应的 jar 包 -->
+	<!-- 指定Spring IOC 容器扫描的包 -->
+	<!-- <context:component-scan base-package="cq.spring4.beans.annotation"></context:component-scan> -->
+
+	<!-- resource-pattern 指定扫描的资源 只扫描annotation子包service下的class -->
+	<!-- <context:component-scan base-package="cq.spring4.beans.annotation"
+		resource-pattern="service/*.class">
+	</context:component-scan> -->
+	
+	<!-- 1.1只包含 -->
+	<!-- use-default-filters="true" 默认情况下的filter -->
+	<!-- <context:component-scan base-package="cq.spring4.beans.annotation" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+	</context:component-scan> -->
+	
+	<!-- 1.2只包含某个类 -->
+	<!-- <context:component-scan base-package="cq.spring4.beans.annotation" use-default-filters="false">
+		<context:include-filter type="assignable" expression="cq.spring4.beans.annotation.repository.UserRepository"/>
+	</context:component-scan> -->
+	
+	
+	<!-- 2.1不包含 -->
+	<!-- <context:component-scan base-package="cq.spring4.beans.annotation" use-default-filters="false">
+		<context:exclude-filter  type="annotation"  expression="org.springframework.stereotype.Repository"/>
+	</context:component-scan> -->
+	
+	<!-- 2.2 （assignable 类不包含） 不包含 某个实现类及其类-->
+	<!-- <context:component-scan base-package="cq.spring4.beans.annotation">
+		<context:exclude-filter  type="assignable"  expression="cq.spring4.beans.annotation.repository.UserRepository"/>
+	</context:component-scan> -->
+		
+	
+</beans>

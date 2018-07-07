@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+	
+	<bean id="studentBean" class="cq.spring4.beans.beanlife.StudentBean"
+		init-method="myinit"
+		destroy-method="mydestory">
+		<property name="name" value="生命周期测试"></property>
+		<property name="age" value="200"></property>
+	</bean>
+	
+	<!-- Bean关联BeanPostProcessor接口 -->
+	<bean id="myBeanPostProcessor" class="cq.spring4.beans.beanlife.MyBeanPostProcessor"></bean>
+
+	<!-- Bean关联MyBeanFactoryPostProcessor -->
+	<bean id="myBeanFactoryPostProcessor" class="cq.spring4.beans.beanlife.MyBeanFactoryPostProcessor"></bean>
+	
+	<!-- Bean关联instantiationAwareBeanPostProcessor
+		bean实例化之前， 之后和 设置属性前调用
+	-->
+	<bean id="myInstantiationAwareBeanPostProcessor" class="cq.spring4.beans.beanlife.MyInstantiationAwareBeanPostProcessor"></bean>
+	
+</beans>

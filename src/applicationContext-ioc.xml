@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+	
+	<!-- 装配实现类 -->
+	<!-- 1 setter注入 实现类-->
+	<bean id="axeImpl" class="cq.spring4.ioc.setter.AxeImpl"></bean>
+	
+	<!-- 在实现类 中 注入其属性  -->
+	<bean id="personImpl" class="cq.spring4.ioc.setter.PersonImpl">
+		<property name="axe" ref="axeImpl"></property>
+	</bean>
+
+
+	<!-- 2 构造器注入实现类 -->
+	<bean id="axeImpl_c"  class="cq.spring4.ioc.constructor.AxeImpl_c">
+	
+	
+	</bean>
+	
+	
+	<bean id="personImpl_c" class="cq.spring4.ioc.constructor.PersonImpl_c">
+		<constructor-arg name="axe" ref="axeImpl_c"></constructor-arg>
+	
+	</bean>
+
+
+</beans>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+
+	<!-- 配置静态工厂方法 -->
+	<bean id="staticCarFactory" class="cq.spring4.beans.factory.StaticCarFactory"
+		factory-method="getCar" >
+		<constructor-arg value="baoma"></constructor-arg>
+	</bean>
+
+
+	<!-- 配置实例工厂  -->
+	<bean id="carFactory" class="cq.spring4.beans.factory.InstanceCarFactory"></bean>
+	
+	<!-- 通过实例工厂 来配置bean -->
+	<bean id="instanceCarFactory" factory-bean="carFactory"
+		factory-method="getCar">
+		<constructor-arg value="aodi"></constructor-arg>
+	</bean>
+
+
+
+
+
+
+
+
+
+</beans> 
